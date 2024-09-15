@@ -1,0 +1,71 @@
+.form {
+  background: #4e94bf;
+  padding: 15px 20px;
+  border-radius: 15px;
+  border: 1px solid black;
+  display: flex;
+  gap: 10px;
+  width: 700px;
+}
+
+.input {
+  background: #262626;
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+
+.btn {
+  background: #193940;
+  padding: 2px 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.listItems {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  margin: 0 auto;
+  width: 400px;
+  background: #193940;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.box_left {
+  display: flex;
+  gap: 20px;
+}
+
+.box_rigth {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.item_edit {
+  color: green;
+}
+
+.item_delete {
+  color: red;
+}
+
+.box_filter {
+  width: 400px;
+  display: flex;
+  gap: 15px;
+  margin: 20px;
+}
+
+.filter_input {
+  background: whitesmoke;
+  color: black;
+}
