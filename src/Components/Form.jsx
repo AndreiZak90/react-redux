@@ -1,34 +1,60 @@
 import ListImput from "./ListImput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { ADD_FORM } from "../Redux/actions";
+import { ADD_FORM, EDIT_ITEM } from "../Redux/actions";
 import Filter from "./Filter";
 
 export default function Form() {
   const [text, setText] = useState("");
   const [number, setNumber] = useState("");
-  const [states, setStates] = useState();
+  const [oldId, setOldId] = useState("");
+  const [position, setPosition] = useState(true);
   const dispatch = useDispatch();
+  const list = useSelector((state) => state.filteredItems);
 
   const addForm = (e) => {
     e.preventDefault();
-    dispatch({
-      type: ADD_FORM,
-      payload: {
-        nameActions: text,
-        valueActions: number,
-      },
-    });
-    setText("");
-    setNumber("");
+    if (text === "" || number === "") return;
+    if (position === false) {
+      console.log("EDIT_ITEM");
+      console.log(oldId);
+      console.log(list);
+      dispatch({
+        type: EDIT_ITEM,
+        payload: {
+          nameActions: text,
+          valueActions: number,
+          idxOld: oldId,
+        },
+      });
+      console.log(list);
+      setText("");
+      setNumber("");
+      setPosition(true);
+      setOldId("");
+    } else {
+      dispatch({
+        type: ADD_FORM,
+        payload: {
+          nameActions: text,
+          valueActions: number,
+          idx: Math.random(),
+        },
+      });
+      console.log(list);
+      setText("");
+      setNumber("");
+      setOldId("");
+    }
   };
 
-  const editForm = (elem) => {
-    setStates(elem);
-    if (states != undefined) {
-      setText(elem.nameActions);
-      setNumber(elem.valueActions);
-    } else return;
+  const editForm = (idx, elem) => {
+    console.log(elem);
+    console.log(idx);
+    setPosition(false);
+    setOldId(idx);
+    setText(elem.nameActions);
+    setNumber(elem.valueActions);
   };
 
   const resetForm = () => {

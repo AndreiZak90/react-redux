@@ -1,4 +1,10 @@
-import { ADD_FORM, CLEAR_FILTERS, DELETE_ITEM, FILTER_ITEMS } from "./actions";
+import {
+  ADD_FORM,
+  CLEAR_FILTERS,
+  DELETE_ITEM,
+  FILTER_ITEMS,
+  EDIT_ITEM,
+} from "./actions";
 import { createStore } from "redux";
 
 const initialState = {
@@ -6,6 +12,7 @@ const initialState = {
     // {
     //   nameActions: "",
     //   valueActions: 0,
+    //   idx: id
     // },
   ],
   filteredItems: [],
@@ -36,10 +43,28 @@ const formReduser = (state = initialState, action) => {
       return {
         ...state,
         list: state.list.filter(
-          (e) => e.nameActions != action.payload.deleteItem
+          (e) => e.nameActions !== action.payload.deleteItem
         ),
         filteredItems: state.list.filter(
-          (e) => e.nameActions != action.payload.deleteItem
+          (e) => e.nameActions !== action.payload.deleteItem
+        ),
+      };
+    case EDIT_ITEM:
+      return {
+        ...state,
+        list: state.list.map((item) =>
+          item.idx === action.payload.idxOld
+            ? {
+                ...action.payload,
+              }
+            : { ...item }
+        ),
+        filteredItems: state.filteredItems.map((item) =>
+          item.idx === action.payload.idxOld
+            ? {
+                ...action.payload,
+              }
+            : { ...item }
         ),
       };
     default:
